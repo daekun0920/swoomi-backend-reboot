@@ -15,4 +15,14 @@ public class SummonerService {
                 .get()
                 .isInGame();
     }
+
+    public String getSummonerProfileImage(String summonerName, String region) {
+        return Orianna
+                .summonerNamed(summonerName)
+                .withRegion(Region.valueOf(region))
+                .get()
+                .getProfileIcon()
+                .getImage()
+                .getURL();
+    }
 }
