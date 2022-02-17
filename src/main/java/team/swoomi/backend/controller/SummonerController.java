@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import team.swoomi.backend.dto.SummonerInGameResponseDto;
 import team.swoomi.backend.dto.SummonerProfileImageResponseDto;
 import team.swoomi.backend.service.SummonerService;
+import team.swoomi.backend.util.SummonerUtil;
 
 @Api(tags = "1. SUMMONER")
 @RestController
@@ -27,7 +28,10 @@ public class SummonerController {
             @ApiParam(value = "리전", defaultValue = "KOREA")
             @RequestParam String region) {
         SummonerInGameResponseDto result
-                = new SummonerInGameResponseDto(summonerService.getIsSummonerInGame(summonerName, region), summonerName);
+                = new SummonerInGameResponseDto(
+                        summonerService.getIsSummonerInGame(summonerName, region),
+                        SummonerUtil.realSummonerName(summonerName, region)
+        );
 
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }

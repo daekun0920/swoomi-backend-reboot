@@ -8,8 +8,7 @@ import javax.annotation.PostConstruct;
 
 @Configuration
 public class OriannaConfig {
-    @Value("${riot.api.key}")
-    private String RIOT_API_KEY;
+    public static String RIOT_API_KEY = "";
 
     @PostConstruct
     public void setApiKey() {
