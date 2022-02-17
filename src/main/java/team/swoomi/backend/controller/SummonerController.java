@@ -6,14 +6,11 @@ import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import team.swoomi.backend.dto.SummonerInGameResponseDto;
 import team.swoomi.backend.service.SummonerService;
 
-@Api(tags = "1. SUMMONER_V4")
+@Api(tags = "1. SUMMONER")
 @RestController
 @RequestMapping("/summoner")
 @RequiredArgsConstructor
@@ -26,8 +23,8 @@ public class SummonerController {
     public ResponseEntity<SummonerInGameResponseDto> getIsSummonerInGame(
             @ApiParam(value = "소환사명", required = true)
             @PathVariable String summonerName,
-            @ApiParam(value = "리전", required = false, defaultValue = "KR")
-            @PathVariable String region) {
+            @ApiParam(value = "리전", defaultValue = "KR")
+            @RequestParam String region) {
         SummonerInGameResponseDto result
                 = new SummonerInGameResponseDto(summonerService.getIsSummonerInGame(summonerName, region), summonerName);
 
